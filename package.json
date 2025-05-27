@@ -1,0 +1,72 @@
+{
+  "name": "github-cli-mcp-server",
+  "version": "2.0.0",
+  "description": "Unified MCP server for GitHub automation and Copilot CLI integration with structured prompt automation",
+  "main": "src/unified-server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/unified-server.js",
+    "start:legacy": "node src/server.js",
+    "start:copilot": "node examples/copilot_cli_mcp_server.js",
+    "dev": "node --watch src/unified-server.js",
+    "test": "node --test test/*.test.js",
+    "test:watch": "node --test --watch test/*.test.js",
+    "test:copilot": "node examples/copilot_cli_mcp_server.js",
+    "setup": "pwsh scripts/setup-github-copilot.ps1",
+    "setup:check": "node -e \"console.log('✅ GitHub CLI:', require('child_process').execSync('gh --version', {encoding: 'utf8'}).split('\\n')[0])\"",
+    "lint": "eslint src/ test/ examples/",
+    "format": "prettier --write src/ test/ examples/ scripts/",
+    "validate": "npm run lint && npm run test && npm run test:copilot",
+    "docs": "echo 'Opening documentation...' && start docs/GITHUB_COPILOT_CLI.md"
+  },
+  "keywords": [
+    "mcp",
+    "github",
+    "cli",
+    "automation",
+    "ai-prompts",
+    "copilot",
+    "unified",
+    "ai-assistance"
+  ],
+  "author": "Joel Fuller",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@octokit/rest": "^20.0.2",
+    "dotenv": "^16.3.1",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5",
+    "@types/node": "^20.11.24"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joelfuller2016/github-cli-mcp-server.git"
+  },
+  "config": {
+    "github_cli_min_version": "2.70.0",
+    "copilot_extension_required": true
+  },
+  "mcp": {
+    "server": {
+      "name": "unified-github-mcp-server",
+      "version": "2.0.0",
+      "tools": 8,
+      "features": [
+        "github-automation",
+        "copilot-cli",
+        "repository-management",
+        "workflow-creation",
+        "pull-request-review",
+        "issue-triage",
+        "ai-assistance"
+      ]
+    }
+  }
+}
